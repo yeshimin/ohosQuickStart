@@ -2,6 +2,7 @@ import { ArticleClass } from '../model/ArticleClass';
 import { BannerClass } from '../model/BannerClass';
 import { Banner } from '../view/Banner';
 import { EnablementView } from '../view/EnablementView';
+import { Header } from '../view/Header';
 import { TutorialView } from '../view/TutorialView';
 import { ArticleDetailPage } from './ArticleDetailPage';
 import { BannerDetailPage } from './BannerDetailPage';
@@ -24,14 +25,15 @@ export struct QuickStartPage {
     Navigation(this.articlePathStack) {
       Column() {
         // ‘快速入门’文本
-        Text(this.message)
-          .fontSize(24)
-          .fontWeight('700')
-          .fontFamily('HarmonyHeiTi-Bold')
-          .lineHeight(33)
-          .width('100%')
-          .textAlign(TextAlign.Start)
-          .padding({ left: 16 })
+        // Text(this.message)
+        //   .fontSize(24)
+        //   .fontWeight('700')
+        //   .fontFamily('HarmonyHeiTi-Bold')
+        //   .lineHeight(33)
+        //   .width('100%')
+        //   .textAlign(TextAlign.Start)
+        //   .padding({ left: 16 })
+        Header()
 
         // banner
         // Banner()
@@ -60,6 +62,5 @@ export struct QuickStartPage {
     .navDestination(this.quickStartRouter)
     .hideTitleBar(true)
     .mode(NavigationMode.Stack)
-
   }
 }
