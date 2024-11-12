@@ -32,30 +32,29 @@ export struct KnowledgeMapContent {
       Image($r(TypeMapIcon[knowledgeBaseItem.type]))
         .width(20)
         .height(20)
+
+      Column() {
+        Text(knowledgeBaseItem.title)
+          .fontFamily('HarmonyHeiTi-Medium')
+          .fontSize(16)
+          .fontWeight(500)
+        Text(knowledgeBaseItem.type)
+          .fontFamily('HarmonyHeiTi')
+          .fontSize(14)
+          .fontWeight(400)
+      }
+      .alignItems(HorizontalAlign.Start)
+      .margin({ left: 18 })
+
+      Blank()
+
+      Image($r('app.media.ic_arrow'))
+        .width(12)
+        .height(24)
     }
     .width('100%')
     .height(64)
     .alignItems(VerticalAlign.Center)
-
-    Column() {
-      Text(knowledgeBaseItem.title)
-        .fontFamily('HarmonyHeiTi-Medium')
-        .fontSize(16)
-        .fontWeight(500)
-
-      Text(knowledgeBaseItem.type)
-        .fontFamily('HarmonyHeiTi')
-        .fontSize(14)
-        .fontWeight(400)
-    }
-    .alignItems(HorizontalAlign.Start)
-    .margin({ left: 18 })
-
-    Blank()
-
-    Image($r('app.media.ic_arrow'))
-      .width(12)
-      .height(24)
   }
 
   @Builder
