@@ -5,6 +5,7 @@ import { bufferToString } from '../util/BufferUtil';
 @Component
 export struct EnablementView {
   @State enablementList: Array<ArticleClass> = [];
+  @Consume('articlePathStack') articlePathStack: NavPathStack;
 
   aboutToAppear(): void {
     this.getDataFromJson();
@@ -32,6 +33,9 @@ export struct EnablementView {
         ForEach(this.enablementList, (item: ArticleClass) => {
           GridItem() {
             EnablementItem({ enablementItem: item })
+              .onClick(() => {
+                this.articlePathStack.pushPathByName('articleDetail', item)
+              })
           }
         }, (item: ArticleClass) => item.id)
       }
@@ -41,7 +45,7 @@ export struct EnablementView {
       .height(169)
       .padding({ top: 2, left: 16, right: 16 })
     }
-    .margin({ top: 18})
+    .margin({ top: 18 })
     .alignItems(HorizontalAlign.Start)
   }
 }
