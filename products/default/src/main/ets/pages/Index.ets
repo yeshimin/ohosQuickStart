@@ -1,12 +1,24 @@
 import { CourseLearning } from '@ohos/learning';
 import { KnowledgeMap } from '@ohos/map';
 import { QuickStartPage } from '@ohos/quickstart';
+import { BreakpointSystem } from '@ohos/utils';
+import { BreakpointTypeEnum } from '@ohos/utils/src/main/ets/utils/BreakpointSystem';
 
 @Entry
 @Component
 struct Index {
   @State currentIndex: number = 0;
   private tabsController: TabsController = new TabsController();
+  private breakpointSystem: BreakpointSystem = new BreakpointSystem();
+  @StorageProp('currentBreakpoint') currentBreakpoint: string = BreakpointTypeEnum.MD;
+
+  aboutToAppear() {
+    this.breakpointSystem.register();
+  }
+
+  aboutToDisappear() {
+    this.breakpointSystem.unregister();
+  }
 
   @Builder
   tabBarBuilder(title: string, targetIndex: number, selectedIcon: Resource, unselectIcon: Resource) {
@@ -33,7 +45,10 @@ struct Index {
   }
 
   build() {
-    Tabs({ barPosition: BarPosition.End, controller: this.tabsController }) {
+    Tabs({
+      barPosition: this.currentBreakpoint === BreakpointTypeEnum.LG ? BarPosition.Start : BarPosition.End,
+      controller: this.tabsController
+    }) {
       TabContent() {
         QuickStartPage()
       }
@@ -57,5 +72,6 @@ struct Index {
     })
     .backgroundColor('#F1F3F5')
     .padding({ top: 36, bottom: 28 })
+    .vertical(this.currentBreakpoint === BreakpointTypeEnum.LG ? true : false)
   }
 }

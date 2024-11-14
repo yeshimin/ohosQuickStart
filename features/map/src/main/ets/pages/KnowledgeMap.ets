@@ -92,6 +92,6 @@ export struct KnowledgeMap {
     }
     .hideTitleBar(true)
     .navDestination(this.PageMap)
-    .mode(NavigationMode.Stack)
+    .mode(NavigationMode.Auto)
   }
 }

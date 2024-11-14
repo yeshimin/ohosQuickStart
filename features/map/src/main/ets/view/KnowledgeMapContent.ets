@@ -1,3 +1,5 @@
+import { BreakpointType, BreakpointTypeEnum } from "@ohos/utils/src/main/ets/utils/BreakpointSystem"
+
 interface KnowledgeBaseItem {
   type: string
   title: string
@@ -25,6 +27,7 @@ const TypeMapIcon: Record<string, string> = {
 export struct KnowledgeMapContent {
   scroller: Scroller = new Scroller();
   @Prop section: Section;
+  @StorageProp('currentBreakpoint') currentBreakpoint: string = BreakpointTypeEnum.MD;
 
   @Builder
   KnowledgeBlockLine(knowledgeBaseItem: KnowledgeBaseItem) {
@@ -82,6 +85,7 @@ export struct KnowledgeMapContent {
         endMargin: 0,
         color: '#F2F2F2'
       })
+      .lanes(new BreakpointType<number>({ sm:1, md: 1, lg: 2, xl: 2 }).getValue(this.currentBreakpoint))
     }
     .width('100%')
     .margin({ top: 28 })

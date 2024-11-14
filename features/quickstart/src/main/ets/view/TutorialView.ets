@@ -1,3 +1,4 @@
+import { BreakpointType, BreakpointTypeEnum } from '@ohos/utils/src/main/ets/utils/BreakpointSystem';
 import { ArticleClass } from '../model/ArticleClass';
 import { bufferToString } from '../util/BufferUtil';
 
@@ -6,6 +7,7 @@ import { bufferToString } from '../util/BufferUtil';
 export struct TutorialView {
   @State tutorialList: Array<ArticleClass> = [];
   @Consume('articlePathStack') articlePathStack: NavPathStack;
+  @StorageProp('currentBreakpoint') currentBreakpoint: string = BreakpointTypeEnum.MD;
 
   aboutToAppear(): void {
     this.getDataFromJson();
@@ -41,6 +43,10 @@ export struct TutorialView {
       }
       .scrollBar(BarState.Off)
       .padding({ left: 16, right: 16 })
+      .lanes(
+        new BreakpointType<number>({ sm: 1, md: 2, lg: 3 }).getValue(this.currentBreakpoint),
+        new BreakpointType<number>({ sm: 0, md: 12, lg: 16 }).getValue(this.currentBreakpoint)
+      )
     }
     .margin({ top: 18 })
     .alignItems(HorizontalAlign.Start)
